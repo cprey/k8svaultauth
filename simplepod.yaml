@@ -1,0 +1,27 @@
+---
+# Sample of a projected token into a pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vaultclient
+spec:
+  containers:
+  - image: vault
+    name: vault
+    env:
+    - name: VAULT_ADDR
+      value: "http://192.168.1.230:8200" # This is the IP of my laptop.
+    # - name: VAULT_TOKEN
+    #   value: root
+    volumeMounts:
+    - mountPath: /var/run/secrets/tokens
+      name: vault-token
+  serviceAccountName: internal-app
+  volumes:
+  - name: vault-token
+    projected:
+      sources:
+      - serviceAccountToken:
+          path: vault-token
+          expirationSeconds: 7200
+          audience: vault
