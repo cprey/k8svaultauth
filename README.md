@@ -12,14 +12,12 @@ The Vault Auth mechanism is a solution for secrets introduction into Kubernetes.
 * docker
 * internet access
 
-https://docs.armory.io/armory-enterprise/armory-admin/secrets/vault-k8s-configuration/
-
 > The Kubernetes Vault Auth Secrets Engine does not currently support token renewal. The `internal-app` you create provides a TTL of two months.
 > By default, Vault has a max_ttl parameter set to 768h0m0s - that’s 32 days. If you want to set the TTL to a higher value, you need to modify this parameter.
 
 ## start Vault in Docker
 
-This is a neat way to run Vault because you can build on it as `vaultfiles` directory will persist between runs
+This is a neat way to run Vault because you can build on it. The `vaultfiles` directory will persist between runs which allows you to build more complex a more Vault and one that will last beyond a reboot.
 
 ```console
 docker run -p 8200:8200 -v "$(pwd)"/vaultfiles:/vault/file --cap-add=IPC_LOCK -e 'VAULT_LOCAL_CONFIG={"disable_mlock": true,"listener": {"tcp": {"address": "0.0.0.0:8200","tls_disable": true}},"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h","api_addr": "http://0.0.0.0:8200","ui": true}' vault server
@@ -196,3 +194,7 @@ kubectl create rolebinding default-view \
 ```
 
 https://kubernetes.io/docs/reference/access-authn-authz/rbac/#service-account-permissions
+
+## Next steps
+
+The kubernetes secret expires in every 32 days. We can redeploy more frequently or we'll need to figure out some rotation mechanism.
