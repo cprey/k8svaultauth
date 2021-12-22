@@ -23,6 +23,18 @@ This is a neat way to run Vault because you can build on it. The `vaultfiles` di
 docker run -p 8200:8200 -v "$(pwd)"/vaultfiles:/vault/file --cap-add=IPC_LOCK -e 'VAULT_LOCAL_CONFIG={"disable_mlock": true,"listener": {"tcp": {"address": "0.0.0.0:8200","tls_disable": true}},"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h","api_addr": "http://0.0.0.0:8200","ui": true}' vault server
 ```
 
+vault will be availble at [http://localhost:8200](http://localhost:8200)
+
+you will need to unseal and get the root token.
+
+![vault1](./imgs/vault1.png)
+
+and
+
+![vault2](./imgs/vault2.png)
+
+download the keys to your desktop.
+
 ## start minikube
 
 ```console
