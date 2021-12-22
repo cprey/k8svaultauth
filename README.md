@@ -185,6 +185,10 @@ export K8S_HOST="https://$(minikube ip):8443"
     ```
 
     ```console
+    SA_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    ```
+
+    ```console
     vault write auth/kubernetes/login role=internal-app jwt=$SA_TOKEN
     ```
 
