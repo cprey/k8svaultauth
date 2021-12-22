@@ -193,6 +193,9 @@ export K8S_HOST="https://$(minikube ip):8443"
     ```
 
     ```console
+    vault login <copy-paste token from output> 
+
+    ```console
     vault kv get v1/kv-v2/hello
     ```
 
