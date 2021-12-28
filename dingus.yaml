@@ -1,0 +1,29 @@
+---
+# Sample of a projected token into a pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dingus
+spec:
+  containers:
+  - image: 1kstep/dingus
+    name: dingus
+    env:
+    - name: VAULT_ADDR
+      value: "http://192.168.1.230:8200" # This is the IP of my laptop.
+    - name: VAULT_ROLE
+      value: "internal-app"
+    - name: VAULT_PATH
+      value: "gfm/dev/buildtools"
+    volumeMounts:
+    - mountPath: /var/run/secrets/tokens
+      name: vault-token
+  serviceAccountName: internal-app
+  volumes:
+  - name: vault-token
+    projected:
+      sources:
+      - serviceAccountToken:
+          path: vault-token
+          expirationSeconds: 7200
+          audience: vault
