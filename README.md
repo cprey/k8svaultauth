@@ -35,6 +35,10 @@ and
 
 download the keys to your desktop.
 
+Click `Continue to Unseal` you'll be promted to enter the key and since you only specified one, you only need the one in your JSON that you downloaded.
+
+Next, Vault prompts you for a token. This is the root_token in your json file. Vault should now be unsealed and ready.
+
 ## start minikube
 
 ```console
@@ -139,6 +143,9 @@ export K8S_HOST="https://$(minikube ip):8443"
     vault auth enable kubernetes
     ```
 
+[disable JWT ISS validation](https://medium.com/pareture/hashicorp-kubernetes-vault-auth-claim-iss-is-invalid-abdd748c8ad6) 
+go into the Vault console, Authentication Methods --> Kubernetes -->  edit configuation --> Disable JWT Issuer Validation and SAVE!
+
 1. Hook Vault to the K8s cluster
 
     ```console
@@ -160,7 +167,7 @@ export K8S_HOST="https://$(minikube ip):8443"
 
 ## Deploy the pod
 
-1. use the supplied `simplepod.yaml` which utilizes `volume projection`. The token is retrieved and placed into the pod.
+1. use the supplied `simplepod.yaml` which utilizes `volume projection`. The token is retrieved and placed into the pod. You MUST set your laptop IP in the samplepod.yaml file before continuing or your pod won't be able to contact the Vault server in Docker. The sample pod is just the vault client container 🐱
 
     ```console
     kubectl apply -f simplepod.yaml
