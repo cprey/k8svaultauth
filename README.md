@@ -167,7 +167,9 @@ go into the [Vault console](http://localhost:8200), Authentication Methods --> K
 
 ## Deploy the pod
 
-1. use the supplied `simplepod.yaml` which utilizes `volume projection`. The token is retrieved and placed into the pod. You MUST set your laptop IP in the samplepod.yaml file before continuing or your pod won't be able to contact the Vault server in Docker. The sample pod is just the vault client container 🐱
+1. use the supplied `simplepod.yaml` which utilizes `volume projection`. The token is retrieved and placed into the pod.
+
+    > You MUST set your laptop IP in the samplepod.yaml file before continuing or your pod won't be able to contact the Vault server in Docker. The sample pod is just a vault client.
 
     ```console
     kubectl apply -f simplepod.yaml
@@ -185,7 +187,7 @@ go into the [Vault console](http://localhost:8200), Authentication Methods --> K
 
     ![jwt-io.png](./imgs/jwt-io.png)
 
-1. Get token and read values
+1. Get token and read values from the deployed pod `vaultclient`
 
     ```console
     kubectl exec -it vaultclient -- sh
