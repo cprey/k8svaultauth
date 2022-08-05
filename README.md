@@ -143,8 +143,8 @@ export K8S_HOST="https://$(minikube ip):8443"
     vault auth enable kubernetes
     ```
 
-[disable JWT ISS validation](https://medium.com/pareture/hashicorp-kubernetes-vault-auth-claim-iss-is-invalid-abdd748c8ad6) 
-go into the Vault console, Authentication Methods --> Kubernetes -->  edit configuation --> Disable JWT Issuer Validation and SAVE!
+    > 💣 Vault is now more strict than before 🗡️ [disable JWT ISS validation](https://medium.com/pareture/hashicorp-kubernetes-vault-auth-claim-iss-is-invalid-abdd748c8ad6)
+go into the [Vault console](http://localhost:8200), Authentication Methods --> Kubernetes -->  edit configuation --> Disable JWT Issuer Validation and SAVE! Did I mention to NOT use this in PRODUCTION !!!!
 
 1. Hook Vault to the K8s cluster
 
